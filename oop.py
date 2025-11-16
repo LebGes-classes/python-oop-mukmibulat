@@ -1,6 +1,5 @@
 class Animal:
 
-
     def __init__(self, name=None, animal_class=None, avg_weight=None):
         
         self.__name=name
@@ -112,6 +111,7 @@ class Menu:
 
     def weight_class(self):
         print(f"Первое животное: {self.__first_animal.get_type()}")
+
         print(f"Второе животное: {self.__second_animal.get_type()}")
 
     def show_animals(self):
