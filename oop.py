@@ -1,36 +1,97 @@
 class Animal:
+    """
+    Данный класс описывает животное
+    """
 
-    def __init__(self, name=None, animal_class=None, avg_weight=None):
-        
-        self.__name=name
-        self.__animal_class=animal_class
-        self.__avg_weight=avg_weight
 
-    def get_name(self):
+    def __init__(self, name = 'NA', animal_class = 'NA', avg_weight = None) -> None:
+        """
+        Конструктор класса.
+
+        :param name: Название животного.
+        :param animal_class: Класс животного.
+        :param avg_weight: Средний вес животного.
+        """
+
+        self.__name = name
+        self.__animal_class = animal_class
+        self.__avg_weight = avg_weight
+
+    def get_name(self) -> str:
+        """Геттер названия животного.
+
+        Returns:
+            __name: название животного.
+        """
+
         return self.__name
 
-    def get_animal_class(self):
+    def get_animal_class(self) -> str:
+        """Геттер класса животного.
+
+        Returns:
+            __animal_class: класс животного.
+        """
+
         return self.__animal_class
 
-    def get_avg_weight(self):
+    def get_avg_weight(self) -> int:
+        """Геттер среднего веса животного.
+
+        Returns:
+            __avg_weight: средний вес животного.
+        """
+
         return self.__avg_weight
 
-    def set_name(self,name):
+    def set_name(self,name) -> None:
+        """Сеттер названия животного.
+
+        Args:
+            name: название животного.
+        """
+
         if name!='':
             self.__name=name
 
-    def set_animal_class(self,animal_class):
+    def set_animal_class(self,animal_class) -> None:
+        """Сеттер класса животного.
+
+        Args:
+            animal_class: класс животного.
+        """
+
         if animal_class!='':
             self.__animal_class=animal_class
 
-    def set_avg_weight(self,avg_weight):
+    def set_avg_weight(self,avg_weight) -> None:
+        """Сеттер среднего веса животного.
+
+        Args:
+            avg_weight: средний вес животного.
+        """
+
         if avg_weight>0:
             self.__avg_weight=avg_weight
 
-    def show(self):
-        print(f'{self.__name}, {self.__animal_class}, {self.__avg_weight} кг')
+    def show(self) -> str:
+        """Вывод полной информации о животном."""
+
+        print(
+            f'Название: {self.__name}\n'
+            f'Класс: {self.__animal_class}\n'
+            f'Средний вес: {self.__avg_weight} кг'
+        )
 
     def get_type(self):
+        """Получение весовой категории животного.
+
+        Returns:
+            'Легкий вес': текущее животное легкое.
+            'Средний вес': текущее животное среднее по весу.
+            'Тяжелый вес': текущее животное тяжелое.
+        """
+
         if self.__avg_weight < 25:
             return 'Легкий вес'
         elif self.__avg_weight < 60:
@@ -39,6 +100,14 @@ class Animal:
             return 'Тяжелый вес'
 
     def compare_animal_weight(self, animal):
+        """Сравнение весов животных.
+
+        Returns:
+            'легче': первое животное легче второго.
+            'тяжелее': первое животное тяжелее второго.
+            'равны': вес первого животного равен весу второго.
+        """
+
         if self.__avg_weight < animal.get_avg_weight():
             return 'легче'
         elif self.__avg_weight > animal.get_avg_weight():
@@ -47,21 +116,42 @@ class Animal:
             return 'равен'
 
 class Menu:
+    """
+    Класс меню для работы с животными.
+    """
+
 
     def __init__(self, first_animal, second_animal):
+        """Конструктор класса.
+
+        :param first_animal: первое животное.
+        :param second_animal: второе животное.
+        """
+
         self.__first_animal=first_animal
         self.__second_animal=second_animal
 
-    def show_menu(self):
-        print('1 - Создать первое животное')
-        print('2 - Изменить первое животное')
-        print('3 - Изменить второе животное')
-        print('4 - Проверить к какой весовой категории относится животное')
-        print('5 - Сравнить вес двух животных')
-        print('6 - Показать информацию о животных')
-        print('7 - Выход')
+    def show_menu(self) -> None:
+        """Показ возможных действий."""
 
-    def user_choice(self, choice):
+        print(
+            '\n..::МЕНЮ ВЗАИМОДЕЙСТВИЯ С ЖИВОТНЫМИ::..\n'
+            '1 - Создать первое животное\n' 
+            '2 - Изменить первое животное\n'
+            '3 - Изменить второе животное\n'
+            '4 - Проверить к какой весовой категории относится животное\n'
+            '5 - Сравнить вес двух животных\n'
+            '6 - Показать информацию о животных\n'
+            '7 - Выход\n'
+        )
+
+    def user_choice(self, choice) -> int:
+        """Выбор пользователя и соответственно действия в зависимости от выбора.
+
+        Args:
+            choice: выбор пользователя.
+        """
+
         match choice:
             case 1:
                 self.create_animal(self.__first_animal)
@@ -78,12 +168,17 @@ class Menu:
 
             case 7:
                 print('Всего х о р о ш е г о')
+
                 return False
 
         return True
 
-    def create_animal(self, animal):
-        name = str(input('Введите название животного: '))
+    def create_animal(self, animal) -> None:
+        """
+        Создаем животное, используя полученные данные.
+        """
+
+        name = str(input('\nВведите название животного: '))
         animal_class = str(input('Введите класс животного: '))
         avg_weight = int(input('Введите средний вес животного: '))
 
@@ -91,11 +186,17 @@ class Menu:
         animal.set_animal_class(animal_class)
         animal.set_avg_weight(avg_weight)
 
-    def change_animal(self, animal):
-        print('Что хотите изменить?')
-        print('1 - Название')
-        print('2 - Класс')
-        print('3 - Средний вес')
+    def change_animal(self, animal) -> None:
+        """
+        Меняем параметры животного, используя полученные данные.
+        """
+
+        print(
+            '\nЧто хотите изменить?\n'
+            '1 - Название\n'
+            '2 - Класс\n'
+            '3 - Средний вес\n'
+        )
 
         change_choice=int(input('Введите цифру: '))
 
@@ -110,27 +211,43 @@ class Menu:
             animal.set_avg_weight(avg_weight)
 
     def weight_class(self):
-        print(f"Первое животное: {self.__first_animal.get_type()}")
+        """
+        Вывод весовой категории животного.
+        """
+
+        print(f"\nПервое животное: {self.__first_animal.get_type()}")
 
         print(f"Второе животное: {self.__second_animal.get_type()}")
 
     def show_animals(self):
-        print('Первое животное: ')
+        """
+        Показ животных.
+        """
+
+        print('\nПервое животное:')
 
         self.__first_animal.show()
 
-        print('Второе животное: ')
+        print('\nВторое животное: ')
 
         self.__second_animal.show()
 
     def compare_animal_weights(self):
+        """
+        Вывод сравнения животных.
+        """
         answer = self.__first_animal.compare_animal_weight(self.__second_animal)
-        print(f'Вес первого животного {answer} второго')
+
+        print(f'\nВес первого животного {answer} второго')
 
 
 class Main:
+    """Основной класс программы."""
+
 
     def run(self):
+        """Приводим программу к работе."""
+
         first_animal=Animal()
         second_animal=Animal('Тигр', 'Хищник', 66)
         menu=Menu(first_animal, second_animal)
